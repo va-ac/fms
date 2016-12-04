@@ -1,0 +1,369 @@
+// We specify a 4em header height in pixels, to make
+// the .menubar link padding calculations simpler.
+$mappage-header-height: 64px;
+
+@import "_colours";
+@import "../sass/layout";
+@import "../sass/report_list_pins";
+
+body, body a {
+  font-family:"Trebuchet MS",Arial, Helvetica, sans-serif;
+}
+
+#front-main {
+  background-color: $primary;
+  background-image: none;
+  @include border-radius(1em 1em 0 0);
+  margin: 2em 1em 0;
+  padding-top: 1em;
+  h1 {
+    margin: 0 auto 0 auto;
+  }
+  h2 {
+      color: $primary_text;
+  }
+  a#geolocate_link {
+      color: $primary_text;
+  }
+}
+
+// Currently hide the nav-wrapper, because it's in going into Oxfordshire's own nav
+.nav-wrapper {
+    display: none;
+}
+
+// hide the site-header, currently has council logo at top of page
+#site-header {
+  display: none;
+}
+
+// White background, so no margin needed.
+.content,
+.iel8 .content {
+    margin: 0;
+}
+
+// Fix location of aside sidebar
+body.twothirdswidthpage {
+    .content {
+        .sticky-sidebar {
+            aside {
+                position: fixed;
+                top: 10em;
+                li { // from occ website
+                  padding-left: 19px;
+                  font: 0.813em "Trebuchet MS";
+                  background: url("images/dot6x6.jpg") no-repeat 0 5px;
+                }
+            }
+        }
+    }
+}
+
+// TODO: This entire section is very suspicious
+//
+// To prevent font size larger interfering with the fixed Oxfordshire layout
+.container { width: auto; }
+body:not(.admin) .full-width { width: 464px; }
+.shadow-wrap { width: 464px; }
+
+.content { width: 432px; }
+
+body.fullwidthpage .content { width: auto; }
+body.twothirdswidthpage .content {
+    width: 640px;
+    aside {
+        left: 672px;
+        width: 208px;
+        padding: 16px;
+    }
+    .sticky-sidebar {
+        left: 672px;
+        aside {
+            top:10em;
+        }
+    }
+}
+
+body.mappage {
+  #oxford-wrapper {
+    width: auto;
+    padding: 0;
+    background: transparent;
+  }
+
+  #oxford-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    width: auto;
+    min-height: $mappage-header-height; // override the normal min-height of 133px
+    padding: 0;
+    background-color: #069b01; // picked from header.jpg
+    background-position: 100% 40%;
+    overflow: auto;
+    @include box-shadow(0 0 5px rgba(0,0,0,0.3));
+
+    & > * {
+      display: none;
+    }
+
+    a.logo {
+      display: block;
+      float: left;
+      height: $mappage-header-height;
+      width: 200px;
+      margin: 0;
+      background: transparent url("images/logo-light-green.gif") no-repeat 50% 50%;
+      text-indent: -999px;
+
+      * {
+        display: none;
+      }
+    }
+
+    #navigation {
+      display: block;
+      position: static;
+      float: right;
+    }
+
+    .menubar {
+      display: block;
+      width: auto;
+      border-top: none;
+      padding: 0;
+
+      // override super-specific "#navigation .menubar .menu-inner .menu>li>a"
+      // selector from OCC header styles in oxfordshire.scss
+      .menu-inner .menu {
+        li {
+          margin-bottom: 0;
+        }
+
+        a, span {
+          line-height: 20px;
+          padding-top: ($mappage-header-height - 20px) / 2;
+          padding-bottom: ($mappage-header-height - 20px) / 2;
+        }
+      }
+    }
+  }
+
+  .wrapper .table-cell {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .container {
+    width: auto;
+  }
+
+  .extra-text {
+    padding: 1em;
+    margin: 0 -1em;
+    border-bottom: 1px solid $oxfordshire_mid_grey_green;
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .full-width {
+    width: auto;
+  }
+
+  input[type="file"] {
+    background-color: transparent;
+  }
+
+  // Space between green header and sidebar content
+  #report-a-problem-main,
+  .problem-header {
+    padding-top: 1em;
+  }
+
+  // The "Fixed" / "Unknown" tabs on Oxford report pages are "folded"
+  // round right edge of the sidebar, rather than over the top of it.
+  .banner {
+    margin: 0 -1em; // line tab up with right edge of 1em padded sidebar
+
+    // Float the tab, rather than absolute positioning, to benefit
+    // from text wrapping and stop content being hidden behind it.
+    p {
+      position: relative; // still required for :before positioning
+      top: auto;
+      right: auto;
+      float: right;
+      margin: 1em -0.75em 0.5em 1em;
+
+      // Swap "fold" triangle to bottom right corner of box, rather than top left.
+      &:before {
+        left: auto;
+        right: 0;
+        top: auto;
+        bottom: -0.75em;
+        border-left: none;
+        border-bottom: none !important; // override default id selectors
+        border-top: 0.75em solid #888;
+        border-right: 0.75em solid transparent;
+      }
+
+      &#fixed:before {
+        border-top-color: #1D4D05; // dark green
+        border-top-color: $col_fixed_label_dark;
+      }
+    }
+  }
+
+  #oxford-footer {
+    display: none;
+  }
+}
+
+#map_sidebar {
+  background-color: $oxfordshire_very_light_green;
+}
+
+#side-inspect {
+  background-color: #deead2;
+}
+
+.item-list--reports {
+    li:after {
+        background-color: $oxfordshire_mid_grey_green;
+    }
+
+    h3 {
+        color: $oxfordshire_link_colour;
+    }
+}
+
+h4.static-with-rule {
+  margin-top: 1em; // down from default 2em, avoid extra space between heading and .council_info_box
+  margin-bottom: 0; // no space between this and the .item-list items
+  background: transparent; // rather than light grey
+  padding: 0.75em 1em * (1/0.875); // compensate for 0.875 font-size
+}
+
+.item-list--updates li {
+  background: transparent;
+  margin-top: 0; // no space between list items
+
+  // Replicate .item-list--reports styling, a bit
+  border-top: 1px solid $oxfordshire_mid_grey_green;
+  padding: 1em 1em 1em 0;
+  margin-left: 1em;
+
+  .item-list__update-text > :last-child {
+    margin-bottom: 0;
+  }
+
+  .meta-2 {
+    font-style: normal;
+  }
+}
+
+.form-box {
+  background-color: #e3f1d5; // darker version of $oxfordshire_very_light_green
+}
+
+.extra-category-questions {
+  background-color: #e3f1d5; // darker version of $oxfordshire_very_light_green
+
+  &:before {
+    border-bottom-color: #e3f1d5; // darker version of $oxfordshire_very_light_green
+  }
+}
+
+.shadow-wrap {
+    ul#key-tools {
+        @include box-shadow(0 0 1em 1em $oxfordshire_very_light_green);
+        border-top-width: 2px;
+    }
+}
+
+#oxford-wrapper #front-main #postcodeForm div {
+  border: 1px solid #fff; // because orange "Go" button (see below) abuts this border, looks a tiny bit better if it's not dark green
+  width: 24em; // up from default 20em
+
+  #pc {
+    padding: 0 0 0 2%;
+    width: 20em;
+    height: 40px;
+  }
+}
+
+// styled Oxfordshire buttons -- including the "Go" button on the postcode form -- to be orange:
+
+#front-main #postcodeForm div input#sub,
+.green-btn,
+button.green-btn,
+input.green-btn{
+  @include button-reset(
+    $oxfordshire_button_top, $oxfordshire_button_bottom, $oxfordshire_button_border, #fff,
+    $oxfordshire_button_top, $oxfordshire_button_bottom, $oxfordshire_button_border, #fff
+  );
+  text-transform:capitalize;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  @include box-shadow(
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 1px 2px rgba(0, 0, 0, 0.05)
+  );
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.click-the-map {
+    border-bottom-color: $oxfordshire_mid_grey_green;
+
+    p {
+        color: $oxfordshire_lt_green;
+        background-image: url(images/click-map-chevron-small.gif);
+    }
+}
+
+#skip-this-step {
+  display: block;
+  color: inherit;
+  margin: 0 -15px;
+  padding: 16px;
+  font-size: 18px;
+  line-height: 20px;
+  border-bottom: 1px solid #E7E1C0;
+  background: #FDF4C5;
+
+  em {
+    font-style: normal;
+    text-decoration: underline;
+    color: $primary;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  html.js & {
+    // If javascript is enabled, hide the skip link off-screen,
+    // but keep it visible for screen readers.
+    position: absolute;
+    top: -999px;
+
+    &:focus {
+      // And show it again if it receives focus (eg: via tab key)
+      position: static;
+    }
+  }
+}
+
+.extra-text__image {
+    float: left;
+    margin-right: 1em;
+}
+
+@import "oxon";

@@ -1,0 +1,17 @@
+Subject: Züri wie neu: Weitergeleitete Meldung #[% id %]
+
+Grüezi [% bodies_name %],
+
+[% external_message %]
+
+
+Öffentliche URL: [% url %]
+
+Name des Meldenden: [% name %]
+
+Email des Meldenden: [% email %]
+
+Telefonnummer des Meldenden: [% phone %]
+
+
+Bei Fragen zu "Züri wie neu" wenden Sie sich bitte an gis-zentrum@zuerich.ch.

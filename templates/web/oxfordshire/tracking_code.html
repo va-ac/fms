@@ -1,0 +1,16 @@
+[% IF c.config.BASE_URL == "https://www.fixmystreet.com" %]
+
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-22094787-2']);
+    _gaq.push(['_setDomainName', '.oxfordshire.gov.uk']);
+    _gaq.push(['_setCustomVar',1,'level1','Roads and transport',3]);
+    _gaq.push(['_setCustomVar',2,'level2','FixMyStreet',3]);
+    _gaq.push(['_trackPageview']);
+
+</script>
+
+[% ELSE %]
+<!-- Tracking code not inserted as "[% c.config.BASE_URL %]" not "https://www.fixmystreet.com" -->
+[% END %]

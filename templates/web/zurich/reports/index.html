@@ -1,0 +1,31 @@
+[%
+    PROCESS "maps/${map.type}.html";
+    INCLUDE 'header.html',
+        title = loc('Summary reports'),
+        bodyclass = 'mappage';
+%]
+[% map_html %]
+</div>
+
+<div id="map_sidebar">
+    <div id="side">
+
+        <h1>[% loc('All Reports') %]</h1>
+
+        <section class="full-width">
+        [% INCLUDE 'pagination.html', param = 'p' %]
+
+          [% IF problems.0 %]
+            <ul class="item-list item-list--reports">
+              [% FOREACH problem IN problems.0 %]
+                [% INCLUDE 'reports/_list-entry.html' %]
+              [% END %]
+            </ul>
+          [% END %]
+
+        [% INCLUDE 'pagination.html', param = 'p' %]
+        </section>
+
+    </div>
+</div>
+[% INCLUDE 'footer.html' %]

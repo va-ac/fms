@@ -1,0 +1,18 @@
+@import "_colours";
+@import "../sass/layout";
+
+.content {
+  margin-top: 8em;
+}
+
+#front-main-container {
+    background-color: $hart_primary;
+}
+
+body.twothirdswidthpage .content {
+    .sticky-sidebar {
+        aside {
+            top: 14em;
+        }
+    }
+}

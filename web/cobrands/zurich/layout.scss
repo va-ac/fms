@@ -1,0 +1,353 @@
+// Zurich has a taller map page header than most cobrands.
+$mappage-header-height: 7em;
+
+@import "colours";
+@import "../sass/layout";
+@import "zurich";
+
+// Things to override from parent stylesheet
+
+.content {
+    color: #3c3c3c;
+}
+
+// Front page content needs a shadow.
+// (Purely decorative: No need for border fallback for IE8)
+body.frontpage .content {
+    @include box-shadow(0 0 6px 1px #000);
+}
+// The header on a map page needs a shadow too
+body.mappage .nav-wrapper .nav-wrapper-2 {
+    @include box-shadow(0 0 6px 1px #000);
+    z-index: 2; // One more than #zurich-main-nav so it's on top
+}
+// Except on admin pages where there's an admin nav directly underneath it
+body.mappage.admin .nav-wrapper-2 {
+    @include box-shadow(none);
+}
+
+// Fix positioning of images in the admin
+body.admin .admin-nav-wrapper {
+    z-index: 1;
+}
+
+// Different header and logo
+#site-header .container {
+    height: 99px;
+    background: url(logo_portal.x.jpg) top left repeat-x;
+}
+
+body.frontpage #site-logo, #site-logo {
+    width: 415px;
+    height: 83px;
+    background: url(logo_portal.jpg) top left no-repeat;
+    top: 0;
+    left: auto; // base set this to 0
+}
+
+// Static map on front page
+body.frontpage {
+    .table-cell {
+        background-position: 50% 117px;
+        background-repeat: no-repeat;
+        background-image: url(mapbg-1024.jpg);
+        @media all and (min-width: 1025px) {
+            background-image: url(mapbg-1600.jpg);
+        }
+        .content {
+            margin: 2em auto; // Spacing around front content on top of static map
+        }
+    }
+
+    #site-header {
+        height: 117px;
+        background-color: #fff;
+        @include box-shadow(0 0 6px 1px #000);
+    }
+}
+
+#site-logo-text {
+    position: absolute;
+    top: 0;
+    z-index: 3;
+    padding-top: 83px;
+    padding-left: 10px;
+    color: #585858;
+    font-size: 85%;
+}
+body.mappage #site-logo-text {
+    position: fixed;
+}
+
+.nav-wrapper {
+    .nav-wrapper-2 {
+        border-top: none;
+    }
+    .nav-wrapper-3 {
+        height: 6em; // rough figure, enough to show the blue band, but less than .nav-wrapper-2 height
+        padding-top: 18px;
+    }
+}
+
+body.mappage {
+    .nav-wrapper {
+        .nav-wrapper-2 {
+            border-top: none;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+    }
+    /* Ugh :( But first wrapper is the caption, second is the fixed (so first we
+       can do padding on) so a third seems necessary for the background then. */
+    .nav-wrapper-3 {
+        background: #fff url(logo_portal.x.jpg) top left repeat-x;
+    }
+    .content {
+      margin-top: 1em;
+    }
+}
+
+// Logged in notice in footer (appearing in header)
+.nav-wrapper-2 p:first-child {
+    font-weight: bold;
+    margin-top: 0.75em;
+}
+.nav-wrapper-2 p {
+    line-height: 1.2;
+    color: white;
+    clear: right;
+    float: right;
+    margin: 0 1em 0 0;
+    font-size: 85%;
+    a {
+        color: white;
+        font-size: 85%;
+    }
+    a:hover {
+        color: white;
+    }
+}
+
+#front-main {
+  background-color: inherit;
+  color: inherit;
+  margin: 0 0 2em 0;
+  #postcodeForm div {
+    border-color: $dark_blue;
+    input#pc {
+      max-width: none;
+    }
+  }
+}
+
+#zurich-main-nav {
+  margin: -1em -1em 1em -1em; // -1em spreads back out over content's 1em padding
+  padding: 0;
+  background-color: #6A6869;
+
+  ul {
+      overflow:auto;
+      margin:0 0 0 0;
+      list-style: none;
+      padding: 0;
+      li {
+          font-size: 80%;
+          float:left;
+          list-style: none;
+          margin:0;
+          color: #fff;
+          a, span {
+            display: block;
+            padding: 0.75em 1em;
+          }
+          a {
+              color: #fff;
+              text-decoration: none;
+              &:hover {
+                background-color: #333;
+              }
+          }
+          span {
+            background-color: $zurich_blue;
+          }
+      }
+  }
+}
+
+body.mappage {
+    #zurich-footer {
+        display: none;
+    }
+
+    #map_sidebar {
+        padding-top: 3em; // make space for the #zurich-main-nav
+    }
+
+    #zurich-main-nav {
+      margin: 0;
+      position: absolute;
+      top: 7em;
+      left: 0;
+      width: 29em; // width of #map_sidebar (including padding)
+      z-index: 1;
+    }
+}
+
+body.twothirdswidthpage {
+    .content {
+        .sticky-sidebar aside {
+          top: 14em; // overrides default value, due to Zurich nav at top of content
+        }
+    }
+}
+
+// Zurich base has made this a more simple construct. The top is to pull it up
+// over the content padding to be attached to the top of the content area.
+// We reduce the padding as no pin image, and change the background.
+.banner {
+    top: -1em;
+    p {
+        &#fixed {
+            padding-top: 2em;
+            background: $col_fixed_label;
+            @include linear-gradient(#769643, $col_fixed_label 4px);
+        }
+        &#closed {
+            padding-top: 2em;
+            background-image: none;
+        }
+    }
+}
+
+#fms_pan_zoom {
+    top: 2em;
+}
+#fms_pan_zoom_zoomin {
+    top: 0;
+}
+#fms_pan_zoom_zoomout {
+    top: 44px;
+}
+
+// Admin specific changes
+
+body.fullwidthpage.admin .content {
+    width: 100%;
+}
+
+body.mappage.admin {
+    // Shuffle things around so they're in the right place
+    #map_box {
+        top: 11em;
+        left: 40em;
+    }
+    #map_sidebar {
+        top: 11em;
+        width: 40em;
+        padding: 0;
+        background: #fff url(/cobrands/zurich/admin-faux-columns.gif) top center repeat-y;
+        @include box-shadow(0 0 5px rgba(0,0,0,0.5));
+    }
+    .content {
+        // To push down the admin navigation
+        margin-top: 6em;
+    }
+}
+
+.admin-report-edit {
+    padding: 1em;
+    width: 50%;
+    float: right;
+    font-size: 0.8em;
+    box-sizing: border-box;
+
+    button, input[type="submit"], .btn {
+        padding: 0.5em 0.5em 0.3em 0.5em;
+        text-transform: none;
+    }
+
+    h2 {
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: bold;
+    }
+}
+
+.admin-report-edit--details {
+    label[for="title"],
+    label[for="detail"] {
+        display: none;
+    }
+
+    #title {
+        margin-top: 1em;
+        font-weight: bold;
+    }
+
+    #detail {
+        margin-bottom: 1em;
+    }
+}
+
+.admin {
+    .content {
+        margin: 2em 0 1em;
+        padding: 0 0 0 0;
+        ul.no-bullets {
+            margin-left: 0;
+            > li {
+              list-style: none;
+            }
+        }
+        li.assignation {
+          list-style: none;
+        }
+        .mock-label {
+          font-weight: bold;
+          padding-right: 0.333em;
+        }
+        :first-child > label {
+            // avoid empty space above first label in a container
+            margin-top: 0;
+        }
+        textarea {
+            min-height: 0;
+        }
+    }
+
+    button, input[type=submit], .btn {
+        &.delete {
+            font-size: 0.75em;
+            color: #933;
+            margin: 2em 0;
+
+            &:hover {
+                @include linear-gradient(#fcc, #daa 50%);
+            };
+        }
+    }
+
+    #zurich-footer {
+        margin: 2em auto 3em auto;
+    }
+
+    .message-updated {
+      color: #060;
+      font-weight: bold;
+      position: absolute;
+    }
+}
+
+.admin-nav-wrapper {
+    background-color: white;
+    padding: 1.5em 0 1em;
+}
+
+body.mappage .admin-nav-wrapper {
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: fixed;
+    width: 100%;
+    @include box-shadow(0 0 5px rgba(0,0,0,0.5));
+}

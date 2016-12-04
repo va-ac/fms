@@ -1,0 +1,43 @@
+                    [% IF pagefooter %]
+                    <footer role="contentinfo">
+                        [% INCLUDE 'front/footer-marketing.html' %]
+                    </footer>
+                    [% END %]
+                </div><!-- .content role=main -->
+            </div><!-- .container -->
+        </div><!-- .table-cell -->
+
+        <div class="nav-wrapper">
+            <div class="nav-wrapper-2">
+                <div id="main-nav" role="navigation">
+                    <ul class="nav-menu nav-menu--main">
+                        <li><[% IF c.req.uri.path == '/' %]span[% ELSE %]a href="/"[% END %] class="report-a-problem-btn"
+                            >[% loc("Report a problem") %]</[% c.req.uri.path == '/' ? 'span' : 'a' %]></li>[%
+                        %]<li><[% IF c.req.uri.path == '/my' %]span[% ELSE %]a href="/my"[% END
+                            %]>[% c.user_exists ? loc("Your account") : loc("Sign in") %]</[% c.req.uri.path == '/my' ? 'span' : 'a' %]></li>[%
+                        %]<li><[% IF c.req.uri.path == '/reports' %]span[% ELSE %]a href="/reports"[% END
+                            %]>[% loc("All reports") %]</[% c.req.uri.path == '/reports' ? 'span' : 'a' %]></li>[%
+                        %]<li><[% IF c.req.uri.path == '/alert' %]span[% ELSE %]a href="/alert[% pc ? '/list?pc=' : '' %][% pc | uri %]"[% END
+                            %]>[% loc("Local alerts") %]</[% c.req.uri.path == '/alert' ? 'span' : 'a' %]></li>[%
+                        %]<li><[% IF c.req.uri.path == '/faq' %]span[% ELSE %]a href="/faq"[% END
+                            %]>[% loc("Help") %]</[% c.req.uri.path == '/faq' ? 'span' : 'a' %]></li>
+                          <!-- <li><a href="javascript:UserVoice.showPopupWidget();">Lämna förslag</a></li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> <!-- .wrapper -->
+
+    [% INCLUDE 'common_footer_tags.html' %]
+
+<script type="text/javascript">
+  var uvOptions = {};
+  (function() {
+    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/vflswzMnwvfytYBz1rNw.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+  })();
+</script>
+</body>
+
+</html>
